@@ -7,11 +7,33 @@ const Teachers = () => {
     const [currentPage, setCurrentPage] = useState(1);
 
     useEffect(() => {
-        fetch('http://localhost:5000/teachers')
+        fetch('https://btpt-server.vercel.app/teachers')
         .then(res=>res.json())
         .then(data=>setTeachers(data))
     }, [])
-  const teachersPerPage = 16;
+
+    const [screenSize, setScreenSize] = useState({
+        width: window.innerWidth,
+        height: window.innerHeight,
+      });
+    
+      useEffect(() => {
+        const handleResize = () => {
+          setScreenSize({
+            width: window.innerWidth,
+            height: window.innerHeight,
+          });
+        };
+    
+        // Add event listener for window resize
+        window.addEventListener('resize', handleResize);
+         // Clean up the event listener on component unmount
+         return () => {
+            window.removeEventListener('resize', handleResize);
+          };
+        }, []);
+        console.log(screenSize.width);
+  const teachersPerPage = screenSize.width<=600?5:16;
   const totalPages = Math.ceil(teachers.length / teachersPerPage);
 
   const handlePageChange = (page) => {
@@ -21,6 +43,8 @@ const Teachers = () => {
     (currentPage - 1) * teachersPerPage,
     currentPage * teachersPerPage
   );
+
+  
     
     //console.log(teachers);
     return (
