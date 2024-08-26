@@ -20,7 +20,7 @@ const Hero = () => {
         
      
       </div> */}
-      <div className='grid grid-cols-5 justify-between gap-5 items-center'>
+      <div className='grid grid-cols-5 justify-between gap-5 items-center py-10'>
         <div className='col-span-2 relative'>
           <div className="relative">
           <div className='one absolute top-10 right-20'></div>
