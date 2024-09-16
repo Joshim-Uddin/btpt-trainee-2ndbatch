@@ -1,10 +1,17 @@
 import React, { useState } from 'react';
 import { useEffect } from 'react';
 import Pagination from './components/Pagination';
+import one from './../src/assets/images/one.jpg';
+import two from './../src/assets/images/two.jpg';
+import three from './../src/assets/images/three.jpg';
+import four from './../src/assets/images/four.jpg';
 
 const Teachers = () => {
     const [teachers, setTeachers] = useState([])
     const [currentPage, setCurrentPage] = useState(1);
+const images = [one, two, three, four]
+    //testing to do remove this
+    const [index, setIndex] = useState(0)
 
     useEffect(() => {
         fetch('https://btpt-server.vercel.app/teachers')
@@ -32,7 +39,7 @@ const Teachers = () => {
             window.removeEventListener('resize', handleResize);
           };
         }, []);
-        console.log(screenSize.width);
+        //console.log(screenSize.width);
   const teachersPerPage = screenSize.width<=600?5:16;
   const totalPages = Math.ceil(teachers.length / teachersPerPage);
 
@@ -68,6 +75,13 @@ const Teachers = () => {
         totalPages={totalPages}
         onPageChange={handlePageChange}
       />
+        </div>
+        {/* to do remove */}
+        <div className='flex py-4 justify-center'>
+          <div>
+          {images.map((image,index) => <img key={index} src={image} alt="" className='max-h-32 w-32' onClick={()=>setIndex(index)}/>)}
+          </div>
+          <img src={images[index]} alt="" className='max-h-44'/>
         </div>
         
         </>
